@@ -1,0 +1,18 @@
+from sqlmodel import Session, select
+from models.birds import Bird, BirdCreate
+
+class BirdRepository:
+    def __init__(self, session: Session):
+        self.session = session
+    
+    def get_all(self):
+        statement = select(Bird)
+        items = self.session.exec(statement).all()
+        return items
+
+    def insert(self, payload: BirdCreate):
+        item = Bird.model_validate(payload)
+        self.session.add(item)
+        self.session.commit()
+        self.session.refresh(item)
+        return item
