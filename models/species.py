@@ -1,6 +1,6 @@
 from decimal import Decimal
-from typing import Optional, List
-from sqlmodel import Field, SQLModel, Relationship
+from typing import Optional
+from sqlmodel import Field, SQLModel
 
 class SpeciesBase(SQLModel):
     name: str
@@ -11,5 +11,6 @@ class SpeciesBase(SQLModel):
 
 class Species(SpeciesBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    # Extra: Allows fetching a species with all its birds
-    birds: List["Bird"] = Relationship(back_populates="species")
+
+class SpeciesCreate(SpeciesBase):
+    pass
