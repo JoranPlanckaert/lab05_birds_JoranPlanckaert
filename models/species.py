@@ -14,3 +14,4 @@ class Species(SpeciesBase, table=True):
 
 class SpeciesCreate(SpeciesBase):
     pass
+
